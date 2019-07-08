@@ -1,13 +1,10 @@
 function hideRead() {
-  alert('okipu');
-  // var urls = [];
-  // var links = document.links;
-  // for (var i = 0; i < links.length; i++) {
-  //   urls.push(links[i].href);
-  // }
-  // chrome.runtime.sendMessage({
-  //   urls: urls,
-  //   visited: markallasread_visited
-  // });
-  // markallasread_visited = !markallasread_visited;
+  const urls = ['https://www.publickey1.jp/blog/19/spotifykubernetes.html', 'https://www.appps.jp/332577/'];
+  console.log('urls', urls);
+
+  chrome.runtime.sendMessage({
+    urls: urls
+  }, null, function(response) {
+    console.log('response', response);
+  });
 }

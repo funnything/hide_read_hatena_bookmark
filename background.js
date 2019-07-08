@@ -4,14 +4,20 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   });
 });
 
-// chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-//   var urls = message.urls;
-//   for (var i = 0; i < urls.length; i++) {
-//     var url = { url: urls[i] };
-//     if (message.visited) {
-//       chrome.history.deleteUrl(url);
-//     } else {
-//       chrome.history.addUrl(url);
-//     }
-//   }
-// });
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  const trav = function(urls, index, results) {
+    if (index < urls.length) {
+      chrome.history.getVisits({ url: urls[index] }, function (items) {
+        results[urls[index]] = items.length == 0;
+        trav(urls, index + 1, results);
+      });
+    } else {
+      sendResponse(results);
+    }
+  };
+
+  trav(message.urls, 0, {});
+
+  // wait async sendResponse
+  return true;
+});
