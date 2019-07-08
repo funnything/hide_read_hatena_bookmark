@@ -1,4 +1,4 @@
-function hide_read() {
+function hideRead() {
   alert('okipu');
   // var urls = [];
   // var links = document.links;
