@@ -13,6 +13,7 @@ function getNode(xpath, root) {
 }
 
 function hideRead() {
+  console.log('will hideRead');
   var nodes = {};
 
   let arr = getNodes("//section[@class='entrylist-unit']//div[@class='entrylist-header']").concat(getNodes("//section[@class='entrylist-unit']//ul[contains(@class,'entrylist-item')]/li"));
@@ -32,4 +33,5 @@ function hideRead() {
       }
     });
   });
+  console.log('did hideRead');
 }
