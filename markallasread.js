@@ -20,12 +20,14 @@ function hideRead() {
   arr.forEach(function(node) {
     let title = getNode(".//h3[@class='entrylist-contents-title']", node);
     let url = getNode(".//a", title).getAttribute('href');
+    console.log(getNode(".//a", title).getAttribute('title'), url);
     nodes[url] = node;
   });
 
   chrome.runtime.sendMessage({
     urls: Object.keys(nodes)
   }, null, function(response) {
+    console.log(response);
     Object.keys(response).forEach(function(url) {
       if (!response[url]) {
         let node = nodes[url];
