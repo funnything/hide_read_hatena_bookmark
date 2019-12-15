@@ -21,7 +21,8 @@
   },
   "permissions": ["history", "tabs", "<all_urls>"],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
