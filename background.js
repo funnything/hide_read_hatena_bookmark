@@ -2,18 +2,19 @@ var urls = ['https://b.hatena.ne.jp/hotentry/*', 'https://www.amazon.co.jp/gp/ne
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create({
-    id: 'okipu',
-    title: 'okipu2',
+    id: 'hideReadItems',
+    title: 'Hide read items',
+    documentUrlPatterns: urls
+  });
+  chrome.contextMenus.create({
+    id: 'markItemsAsRead',
+    title: 'Mark items as read',
     documentUrlPatterns: urls
   });
 });
 
-chrome.contextMenus.onClicked.addListener(function(itemData) {
-  if (itemData.menuItemId == 'okipu') {
-    chrome.tabs.executeScript(null, {
-      code: 'okipu();'
-    });
-  }
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+  chrome.tabs.executeScript(tab.id, { code: info.menuItemId + '();' })
 });
 
 chrome.browserAction.onClicked.addListener(function(tab) {

@@ -1,5 +1,9 @@
-function okipu() {
-  console.log('okipu', document);
+function hideReadItems() {
+  console.log('hideReadItems');
+}
+
+function markItemsAsRead() {
+  console.log('markItemsAsRead');
 }
 
 function getNodes(xpath) {
