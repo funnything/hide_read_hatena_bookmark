@@ -19,7 +19,7 @@
     },
     "default_title": "Hide read hatena bookmark"
   },
-  "permissions": ["history", "tabs", "<all_urls>"],
+  "permissions": ["history", "tabs", "<all_urls>", "contextMenus"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false

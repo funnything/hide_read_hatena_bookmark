@@ -1,3 +1,7 @@
+function okipu() {
+  console.log('okipu', document);
+}
+
 function getNodes(xpath) {
   var nodes = [];
   let iter = document.evaluate(xpath, document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
@@ -20,14 +24,12 @@ function hideRead() {
   arr.forEach(function(node) {
     let title = getNode(".//h3[@class='entrylist-contents-title']", node);
     let url = getNode(".//a", title).getAttribute('href');
-    console.log(getNode(".//a", title).getAttribute('title'), url);
     nodes[url] = node;
   });
 
   chrome.runtime.sendMessage({
     urls: Object.keys(nodes)
   }, null, function(response) {
-    console.log(response);
     Object.keys(response).forEach(function(url) {
       if (!response[url]) {
         let node = nodes[url];
