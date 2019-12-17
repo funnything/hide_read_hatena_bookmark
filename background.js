@@ -23,6 +23,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   });
 });
 
+// Add identifier to message, if want to use messaging multiple purpose
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   const trav = function(urls, index, results) {
     if (index < urls.length) {
