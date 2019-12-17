@@ -17,7 +17,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
   chrome.tabs.executeScript(tab.id, { code: info.menuItemId + '();' })
 });
 
-// TODO: remove
+// TODO: remove?
 chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript(null, {
     code: 'hideRead();'
