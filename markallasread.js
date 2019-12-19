@@ -1,6 +1,6 @@
-function getNodes(xpath) {
+function getNodes(xpath, root) {
   var nodes = [];
-  let iter = document.evaluate(xpath, document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+  let iter = document.evaluate(xpath, root || document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
   var node;
   while (node = iter.iterateNext()) {
     nodes.push(node);
@@ -25,10 +25,27 @@ function hatenaBookmark() {
   return nodes;
 }
 
+// TODO: 毎回違うパラメーターが付いてくる。URL を正規化して判定＆表示中の項目の URL を置換する
+function amazon() {
+  var nodes = {};
+
+  let arr = getNodes("//li[@class='zg-item-immersion']")
+  arr.forEach(function(node) {
+    // NOTE: naive method (use first anchor)
+    let rel = getNodes(".//a", node)[0].getAttribute('href');
+    let url = new URL(rel, location.href).href;
+    nodes[url] = node;
+  });
+
+  return nodes;
+}
+
 function parseNodes() {
   var url = location.href;
   if (url.startsWith('https://b.hatena.ne.jp/hotentry/')) {
     return hatenaBookmark();
+  } else if (url.startsWith('https://www.amazon.co.jp/gp/')) {
+    return amazon();
   } else {
     throw new Error('Uknown url: ' + url);
   }

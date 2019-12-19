@@ -1,4 +1,4 @@
-var urls = ['https://b.hatena.ne.jp/hotentry/*', 'https://www.amazon.co.jp/gp/new-releases/*']
+var urls = ['https://b.hatena.ne.jp/hotentry/*', 'https://www.amazon.co.jp/gp/*']
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create({
