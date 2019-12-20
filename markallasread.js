@@ -25,15 +25,23 @@ function hatenaBookmark() {
   return nodes;
 }
 
-// TODO: 毎回違うパラメーターが付いてくる。URL を正規化して判定＆表示中の項目の URL を置換する
 function amazon() {
   var nodes = {};
 
   let arr = getNodes("//li[@class='zg-item-immersion']")
   arr.forEach(function(node) {
-    // NOTE: naive method (use first anchor)
-    let rel = getNodes(".//a", node)[0].getAttribute('href');
-    let url = new URL(rel, location.href).href;
+    // NOTE: naive method (using first anchor)
+    let anchor = getNodes(".//a", node)[0]
+
+    let rel = anchor.getAttribute('href');
+    let match = /\/dp\/.+?\//.exec(rel);
+    if (match == null) {
+      throw new Error('Invalid URL: ' + rel);
+    }
+
+    anchor.setAttribute('href', match[0]);
+
+    let url = new URL(match[0], location.href).href;
     nodes[url] = node;
   });
 
